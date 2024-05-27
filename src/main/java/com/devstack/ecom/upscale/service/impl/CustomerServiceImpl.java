@@ -5,6 +5,7 @@ import com.devstack.ecom.upscale.entity.Customer;
 import com.devstack.ecom.upscale.repo.CustomerRepo;
 import com.devstack.ecom.upscale.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -12,7 +13,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-
     private final CustomerRepo customerRepo;
 
     @Override

@@ -71,6 +71,11 @@ public class CustomerServiceImpl implements CustomerService {
                 .build();
     }
 
+    @Override
+    public void delete(String id) {
+        customerRepo.deleteById(id);
+    }
+
     private ResponseCustomerDto toResponseCustomerDto(Customer customer){
         return ResponseCustomerDto.builder()
                 .propertyId(customer.getPropertyId())

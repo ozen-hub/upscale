@@ -9,4 +9,5 @@ public interface CustomerService {
     public ResponseCustomerDto findById(String id);
     public void update(String id,RequestCustomerDto dto);
     public CustomerPaginateDto findAll(String searchText, int page, int size);
+    public void delete(String id);
 }

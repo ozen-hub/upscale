@@ -49,11 +49,16 @@ public class CustomerController {
     }
 
     @GetMapping("/list")
-    public String getAll(
+    public ResponseEntity<StandardResponse> getAll(
             @RequestParam String searchText,
             @RequestParam int page,
             @RequestParam int size
     ) {// find data // http://localhost:8001/api/v1/customers/list [GET]
-        return "getAll()";
+
+        return new ResponseEntity<>(
+                new StandardResponse(201,"Customer list!..",
+                        customerService.findAll(searchText, page, size)),
+                HttpStatus.CREATED
+        );
     }
 }

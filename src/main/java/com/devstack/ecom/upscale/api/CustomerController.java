@@ -47,8 +47,8 @@ public class CustomerController {
     public ResponseEntity<StandardResponse> delete(@PathVariable String id) {// remove data // http://localhost:8001/api/v1/customers [DELETE]
        customerService.delete(id);
         return new ResponseEntity<>(
-                new StandardResponse(201,"Customer was deleted!..",null),
-                HttpStatus.CREATED
+                new StandardResponse(204,"Customer was deleted!..",null),
+                HttpStatus.NO_CONTENT
         );
     }
 
@@ -60,9 +60,9 @@ public class CustomerController {
     ) {// find data // http://localhost:8001/api/v1/customers/list [GET]
 
         return new ResponseEntity<>(
-                new StandardResponse(201,"Customer list!..",
+                new StandardResponse(200,"Customer list!..",
                         customerService.findAll(searchText, page, size)),
-                HttpStatus.CREATED
+                HttpStatus.OK
         );
     }
 }

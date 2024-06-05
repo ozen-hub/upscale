@@ -1,5 +1,6 @@
 package com.devstack.ecom.upscale.service.impl;
 
+import com.amazonaws.services.dlm.model.InternalServerException;
 import com.devstack.ecom.upscale.dto.request.RequestProductImageDto;
 import com.devstack.ecom.upscale.dto.response.ResponseProductImageDto;
 import com.devstack.ecom.upscale.entity.Product;
@@ -15,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,21 +33,40 @@ public class ProductImageServiceImpl implements ProductImageService {
     private final FileDataExtractor dataExtractor;
 
     @Override
-    public void create(RequestProductImageDto dto, String productId) {
-        Optional<Product> selectedProduct = productRepo.findById(productId);
-        if (selectedProduct.isEmpty()) {
-            throw new EntryNotFoundException("the product was not found...");
+    public void create(RequestProductImageDto dto, String productId) throws SQLException, IOException {
+        CommonFileSavedBinaryDataDTO resource=null;
+        try {
+            Optional<Product> selectedProduct = productRepo.findById(productId);
+            if (selectedProduct.isEmpty()) {
+                throw new EntryNotFoundException("the product was not found...");
+            }
+
+            resource = fileService.createResource(dto.getImage(), "upscale/product_images/", bucketName);
+
+            ProductImage productImage = ProductImage.
+                    builder()
+                    .propertyId(UUID.randomUUID().toString())
+                    .hash(dataExtractor.blobToByteArray(
+                            resource.getHash()
+                    ))
+                    .directory(resource.getDirectory().getBytes())
+                    .fileName(dataExtractor.blobToByteArray(
+                            resource.getFileName()
+                    ))
+                    .resourceUrl(dataExtractor.blobToByteArray(
+                            resource.getResourceUrl()
+                    ))
+                    .product(selectedProduct.get())
+                    .build();
+
+            productImageRepo.save(productImage);
+        } catch (Exception e) {
+            fileService.deleteResource(bucketName,
+                    resource.getDirectory(),dataExtractor.extractActualFileName(
+                            new InputStreamReader( resource.getFileName().getBinaryStream())));
+            throw new InternalServerException("something went wrong..");
         }
 
-        CommonFileSavedBinaryDataDTO resource = fileService.createResource(dto.getImage(), "upscale/product_images/", bucketName);
-
-        ProductImage productImage = ProductImage.
-                builder()
-                .propertyId(UUID.randomUUID().toString())
-                .hash(dataExtractor.)
-                .directory()
-                .fileName()
-                .resourceUrl().build();
 
     }
 

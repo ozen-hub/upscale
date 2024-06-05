@@ -10,6 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductImageDto {
+public class RequestProductImageDto {
     private MultipartFile image;
 }

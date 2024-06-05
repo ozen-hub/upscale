@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductDto {
+public class RequestProductDto {
     private Long qty;
     private Double unitPrice;
     private String description;

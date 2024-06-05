@@ -20,6 +20,8 @@ public class CustomerOrder {
     private Date createdDate;
     private double total;
     private int qty;
+
+    @Enumerated(value = EnumType.STRING)
     private PaymentType type;
 
     @ManyToOne(fetch = FetchType.LAZY)

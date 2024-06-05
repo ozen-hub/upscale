@@ -9,6 +9,5 @@ import com.devstack.ecom.upscale.dto.response.paginate.CustomerPaginateDto;
 public interface ProductImageService {
     public void create(RequestProductImageDto dto, String productId);
     public ResponseProductImageDto findById(String id);
-    public CustomerPaginateDto findAll(String productId, int page, int size);
     public void delete(String id);
 }

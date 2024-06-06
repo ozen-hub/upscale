@@ -1,5 +1,12 @@
 package com.devstack.ecom.upscale.dto.response;
 
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ResponseProductImageDto {
     private String propertyId;
     private String directory;

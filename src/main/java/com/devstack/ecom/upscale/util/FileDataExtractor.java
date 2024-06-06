@@ -3,6 +3,7 @@ package com.devstack.ecom.upscale.util;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -24,6 +25,13 @@ public class FileDataExtractor {
             }
             return outputStream.toByteArray();
         }
+    }
+    public String byteArrayToString(byte[] byteArray) {
+        if (byteArray == null || byteArray.length == 0) {
+            return null;
+        }
+
+        return new String(byteArray, StandardCharsets.UTF_8); // Change the charset as per your requirement
     }
 
     public String extractActualFileName(InputStreamReader streamReader) throws SQLException, IOException {

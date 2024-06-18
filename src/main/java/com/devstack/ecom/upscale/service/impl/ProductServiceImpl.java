@@ -20,8 +20,8 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepo productRepo;
-    private FileDataExtractor fileDataExtractor;
+    private final ProductRepo productRepo;
+    private final FileDataExtractor fileDataExtractor;
 
     @Override
     public void create(RequestProductDto dto) {

@@ -3,6 +3,7 @@ package com.devstack.ecom.upscale.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,9 +23,9 @@ public class Product {
     private String description;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-    private HashSet<ProductImage> images = new HashSet<>();
+    private List<ProductImage> images = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private Set<CustomerOrder> orders= new HashSet<>();
+    private List<CustomerOrder> orders= new ArrayList<>();
 
 }

@@ -25,6 +25,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void create(RequestProductDto dto) {
+        System.out.println(dto.getQty());
+        System.out.println(dto.getUnitPrice());
+        System.out.println(dto.getDescription());
         Product product = Product.builder()
                 .description(dto.getDescription())
                 .qty(dto.getQty())

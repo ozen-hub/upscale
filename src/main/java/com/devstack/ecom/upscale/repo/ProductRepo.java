@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ProductRepo extends JpaRepository<Product,String> {
-    @Query(value = "SELECT * FROM product WHERE description LIKE %?1%  ORDER BY name DESC", nativeQuery = true)
+   @Query(value = "SELECT * FROM product WHERE description LIKE %?1% ORDER BY description DESC", nativeQuery = true)
     public Page<Product> findAllWithSearchText(String searchText, Pageable pageable);
 
     @Query(value = "SELECT COUNT(*) FROM product WHERE description LIKE %?1%", nativeQuery = true)

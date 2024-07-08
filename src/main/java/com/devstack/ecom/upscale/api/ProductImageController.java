@@ -21,7 +21,8 @@ public class ProductImageController {
     private final ProductImageService productImageService;
 
     @PostMapping("/{product}")
-    public ResponseEntity<StandardResponse> create(@RequestParam("productImage") MultipartFile file,
+    public ResponseEntity<StandardResponse>
+    create(@RequestParam("productImage") MultipartFile file,
                                                    @PathVariable String product) throws SQLException, IOException {
         productImageService.create(file,product);
         return new ResponseEntity<>(

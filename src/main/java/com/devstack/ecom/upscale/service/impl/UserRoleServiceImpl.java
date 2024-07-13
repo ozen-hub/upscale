@@ -7,6 +7,8 @@ import com.devstack.ecom.upscale.service.UserRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -19,5 +21,23 @@ public class UserRoleServiceImpl implements UserRoleService {
         UserRole build = UserRole.builder().roleId(UUID.randomUUID().toString()).roleName(dto.getRoleName())
                 .description(dto.getDescription()).build();
         roleRepo.save(build);
+    }
+
+    @Override
+    public void initializerUserRoles() {
+        List<UserRole> list = roleRepo.findAll();
+        if (list.isEmpty()){
+            roleRepo.saveAll(List.of(
+                    UserRole.builder().roleId(UUID.randomUUID().toString())
+                            .roleName("USER").description("Description").build(),
+                    UserRole.builder().roleId(UUID.randomUUID().toString())
+                            .roleName("CUSTOMER").description("Description").build(),
+                    UserRole.builder().roleId(UUID.randomUUID().toString())
+                            .roleName("ADMIN").description("Description").build(),
+                    UserRole.builder().roleId(UUID.randomUUID().toString())
+                            .roleName("MANAGER").description("Description").build()
+            ));
+        }
+
     }
 }

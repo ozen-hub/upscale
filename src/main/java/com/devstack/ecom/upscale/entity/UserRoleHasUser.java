@@ -1,10 +1,7 @@
 package com.devstack.ecom.upscale.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Table(name="user_role_has_user")
 @Entity
@@ -12,6 +9,7 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserRoleHasUser {
 
     @EmbeddedId

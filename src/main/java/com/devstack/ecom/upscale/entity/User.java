@@ -1,10 +1,7 @@
 package com.devstack.ecom.upscale.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
@@ -14,6 +11,7 @@ import java.util.Set;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
     @Id
     @Column(name = "user_id", length = 80)

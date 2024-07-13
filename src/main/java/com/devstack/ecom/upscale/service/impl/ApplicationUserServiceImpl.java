@@ -33,7 +33,7 @@ public class ApplicationUserServiceImpl implements UserDetailsService {
             throw new EntryNotFoundException(String.format("username %s not found",username));
         }
 
-        List<UserRoleHasUser> roleList = userRoleHasUserRepo.findAllByUser(selectedUser.get().getUserId());
+        List<UserRoleHasUser> roleList = userRoleHasUserRepo.findByUserId(selectedUser.get().getUserId());
         Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
 
         for(UserRoleHasUser u:roleList){

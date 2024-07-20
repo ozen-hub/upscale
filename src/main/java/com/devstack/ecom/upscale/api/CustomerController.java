@@ -18,6 +18,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<StandardResponse> create(@RequestBody RequestCustomerDto dto) {// data save // http://localhost:8001/api/v1/customers [POST]
         customerService.create(dto);
         return new ResponseEntity<>(
@@ -27,6 +28,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<StandardResponse> get(@PathVariable String id) {// find data // http://localhost:8001/api/v1/customers/1234 [GET]
         return new ResponseEntity<>(
                 new StandardResponse(200,"Customer data!..",customerService.findById(id)),
@@ -35,6 +37,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<StandardResponse> update(@PathVariable String id,
                          @RequestBody RequestCustomerDto dto) {// update data // http://localhost:8001/api/v1/customers [PUT]
         customerService.update(id,dto);
@@ -45,6 +48,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<StandardResponse> delete(@PathVariable String id) {// remove data // http://localhost:8001/api/v1/customers [DELETE]
        customerService.delete(id);
         return new ResponseEntity<>(
@@ -54,6 +58,7 @@ public class CustomerController {
     }
 
     @GetMapping("/list")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<StandardResponse> getAll(
             @RequestParam String searchText,
             @RequestParam int page,

@@ -23,7 +23,7 @@ public class UserRole {
     @Column(name = "description", length = 100)
     private String description;
 
-    @OneToMany(mappedBy = "userRole", fetch = FetchType.LAZY)
-    private Set<UserRoleHasUser> userRoleHasUsers;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
 }
